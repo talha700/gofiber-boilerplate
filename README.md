@@ -10,5 +10,3 @@
 
 ## API Docs
  API docs: http://localhost:5000/swagger/ 
-
-![Docs](https://drive.google.com/file/d/1S_s7bZlSYmtCfT9uX7dOnypnsVUhuUW1/view?usp=sharing)
