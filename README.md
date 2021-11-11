@@ -11,8 +11,12 @@
 ## API Docs
  API docs: http://localhost:5000/swagger/ 
 
+
+
+## Caveats
+ fiber-swagger does not support OpenAPI 3.0
  
  <hr>
- 
+
 ### Inspiration
  [fiber-go-template](https://github.com/create-go-app/fiber-go-template)
