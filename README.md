@@ -10,3 +10,6 @@
 
 ## API Docs
  API docs: http://localhost:5000/swagger/ 
+
+### Inspiration
+ [fiber-go-template](https://github.com/create-go-app/fiber-go-template)
