@@ -1,14 +1,14 @@
 package main
 
 import (
-	"github.com/gofiberAPI-biolerplate/pkg/configs"
-	"github.com/gofiberAPI-biolerplate/pkg/middleware"
-	"github.com/gofiberAPI-biolerplate/pkg/routes"
-	"github.com/gofiberAPI-biolerplate/platform/database"
+	"github.com/gofiber-biolerplate/pkg/configs"
+	"github.com/gofiber-biolerplate/pkg/middleware"
+	"github.com/gofiber-biolerplate/pkg/routes"
+	"github.com/gofiber-biolerplate/platform/database"
 
 	"github.com/gofiber/fiber/v2"
 
-	_ "github.com/gofiberAPI-biolerplate/docs"
+	_ "github.com/gofiber-biolerplate/docs"
 )
 
 
