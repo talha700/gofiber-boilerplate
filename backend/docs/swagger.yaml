@@ -1,0 +1,223 @@
+basePath: /api/v1
+definitions:
+  models.ChangePass:
+    properties:
+      error:
+        example: false
+        type: boolean
+      msg:
+        type: string
+    type: object
+  models.EditPassword:
+    properties:
+      new_pass:
+        type: string
+      old_pass:
+        type: string
+    required:
+    - new_pass
+    type: object
+  models.LoginResponse:
+    properties:
+      error:
+        type: boolean
+      msg:
+        type: string
+      token:
+        $ref: '#/definitions/models.Tokens'
+    type: object
+  models.RefreshTokenResponse:
+    properties:
+      error:
+        example: false
+        type: boolean
+      msg:
+        type: string
+    type: object
+  models.Renew:
+    properties:
+      refresh_token:
+        type: string
+    type: object
+  models.SignIn:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  models.SignUp:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - email
+    - password
+    type: object
+  models.SignUpResponse:
+    properties:
+      error:
+        example: false
+        type: boolean
+      msg:
+        type: string
+    type: object
+  models.Tokens:
+    properties:
+      access:
+        type: string
+      refresh:
+        type: string
+    type: object
+host: go.local:5000
+info:
+  contact:
+    email: talhajaved700@gmail.com
+    name: API Support
+  description: API Documentation
+  title: Fiber API Biolerplate
+  version: "1.0"
+paths:
+  /device:
+    get:
+      consumes:
+      - application/json
+      description: Get Devices
+      parameters:
+      - default: Bearer <token>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: ""
+      security:
+      - JWT: []
+      - BearerAuth: []
+      summary: Get Devices
+      tags:
+      - Device
+  /token/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Get Refresh Tokens
+      parameters:
+      - default: Bearer <token>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Give Refresh Token
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.Renew'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/models.RefreshTokenResponse'
+      security:
+      - BearerAuth: []
+      summary: Get Refresh Tokens
+      tags:
+      - User
+  /user/changepass:
+    post:
+      consumes:
+      - application/json
+      description: change user password
+      parameters:
+      - default: Bearer <token>
+        description: Insert your access token
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Give old and new password
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.EditPassword'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ChangePass'
+        "400":
+          description: ""
+      security:
+      - BearerAuth: []
+      summary: Change User Password
+      tags:
+      - User
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: Get Access and Refresh Tokens
+      parameters:
+      - description: Give username and Password
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.SignIn'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.LoginResponse'
+        "400":
+          description: ""
+      summary: User Login
+      tags:
+      - User
+  /user/signup:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: User Data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.SignUp'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.SignUpResponse'
+        "400":
+          description: ""
+      summary: Create New User
+      tags:
+      - User
+swagger: "2.0"

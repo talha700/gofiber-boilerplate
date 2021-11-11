@@ -1,0 +1,46 @@
+version: "3.5"
+services:
+  db:
+    image: postgres:14
+    env_file:
+      - .env
+    volumes:
+      - app-db-data:/var/lib/postgresql/data/pgdata
+    environment:
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    networks:
+      - internal-network
+  
+
+  app:
+    image: fiber-app
+    build: ./backend/
+    depends_on:
+      - db
+    env_file:
+      - .env
+    command: ["bash","/build/scripts/prod_start.sh"]
+    networks:
+      - internal-network
+
+
+  nginx:
+    build:
+      context: ./nginx/
+    ports:
+      - 80:80
+      # - 443:443
+    env_file:
+      - .env
+    depends_on:
+      - app
+    networks:
+      - internal-network
+
+
+volumes:
+  app-db-data:
+
+networks:
+  internal-network:
+    external: false
