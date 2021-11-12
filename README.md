@@ -9,7 +9,7 @@
 
 
 ## API Docs
- API docs: http://localhost:5000/swagger/ 
+ API docs can be accessed on /swagger/ 
 
 
 
