@@ -11,6 +11,8 @@
 ## API Docs
  API docs can be accessed on /swagger/ 
 
+## Tutorial
+ [Click Me](https://youtu.be/NLuUy8yOrio)
 
 
 ## Caveats
